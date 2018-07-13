@@ -63,7 +63,7 @@
               var files1 = $('input');
               var maxFileSize=5000000;
               var form=$('#forma');
-           $( "#greatphoto" ).attr( "src",  files1[0].files[0].name);
+           $( "#greatphoto" ).attr( "src",  '//'+files1[0].files[0].name);
            console.log(files1);
            event.preventDefault();
                 setTimeout(function () {
