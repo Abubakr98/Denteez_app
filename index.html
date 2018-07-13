@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<style media="screen">
+*{
+  margin: 0;
+  padding: 0;
+}
+  body {
+      font: 12px Arial, sans-serif;
+  }
+
+  #dropZone {
+      color: #555;
+      font-size: 18px;
+      text-align: center;
+
+      width: 400px;
+      padding: 50px 0;
+      margin: 50px auto;
+
+      background: #eee;
+      border: 1px solid #ccc;
+
+      -webkit-border-radius: 5px;
+      -moz-border-radius: 5px;
+      border-radius: 5px;
+  }
+
+  #dropZone.hover {
+      background: #ddd;
+      border-color: #aaa;
+  }
+
+  #dropZone.error {
+      background: #faa;
+      border-color: #f00;
+  }
+
+  #dropZone.drop {
+      background: #afa;
+      border-color: #0f0;
+
+  }
+
+  </style>
+</head>
+<body>
+  <img id="greatphoto" style="position:absolute;z-index:-999; opacity: 0;" src="" alt="brush seller">
+  <form id="forma" action="#" method="post">
+       <input  type="file" accept="image/*,image/jpeg" name="123" value="">
+       <button id="root"  name="button">Send</button>
+     </form>
+
+    <script type="text/javascript">
+    $(document).ready(function() {
+      var myImg = $('#greatphoto');
+            $('#root').click((e)=>{
+              var files1 = $('input');
+              var maxFileSize=5000000;
+              var form=$('#forma');
+           $( "#greatphoto" ).attr( "src",  files1[0].files[0].name);
+           console.log(files1);
+           event.preventDefault();
+                setTimeout(function () {
+                  var myImg = $('#greatphoto');
+                  console.log(myImg);
+                  if (myImg[0].height > 300 || myImg[0].width > 300) {
+                      alert(`Картинка слишком большая, ${myImg[0].width}x${myImg[0].height}, а надо небольше чем 300х300!!!`)
+                  }else if (files1[0].files[0].size>maxFileSize) {
+                      alert("Картинка весит ${files1[0].files[0].size} максимальный размер ${maxFileSize}!!!")
+                  }else {
+
+// form.submit();
+                  }
+
+                }, 500);
+            })
+    });
+
+
+    </script>
+</body>
+
+</html>
