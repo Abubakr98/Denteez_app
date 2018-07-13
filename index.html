@@ -2,19 +2,20 @@
 <html lang="en" dir="ltr">
 
 <head>
-    <meta charset="utf-8">
-    <title></title>
-     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<style media="screen">
-*{
-  margin: 0;
-  padding: 0;
-}
-  body {
-      font: 12px Arial, sans-serif;
-  }
+  <meta charset="utf-8">
+  <title></title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <style media="screen">
+    * {
+      margin: 0;
+      padding: 0;
+    }
 
-  #dropZone {
+    body {
+      font: 12px Arial, sans-serif;
+    }
+
+    #dropZone {
       color: #555;
       font-size: 18px;
       text-align: center;
@@ -29,61 +30,89 @@
       -webkit-border-radius: 5px;
       -moz-border-radius: 5px;
       border-radius: 5px;
-  }
+    }
 
-  #dropZone.hover {
+    #dropZone.hover {
       background: #ddd;
       border-color: #aaa;
-  }
+    }
 
-  #dropZone.error {
+    #dropZone.error {
       background: #faa;
       border-color: #f00;
-  }
+    }
 
-  #dropZone.drop {
+    #dropZone.drop {
       background: #afa;
       border-color: #0f0;
 
-  }
-
+    }
   </style>
 </head>
+
 <body>
   <img id="greatphoto" style="position:absolute;z-index:-999; opacity: 0;" src="" alt="brush seller">
   <form id="forma" action="#" method="post">
-       <input  type="file" accept="image/*,image/jpeg" name="123" value="">
-       <button id="root"  name="button">Send</button>
-     </form>
+    <input type="file" accept="image/*,image/jpeg" name="filePhoto" value="">
+    <button id="root" name="button">Send</button>
+  </form>
 
-    <script type="text/javascript">
+  <script type="text/javascript">
     $(document).ready(function() {
       var myImg = $('#greatphoto');
-            $('#root').click((e)=>{
-              var files1 = $('input');
-              var maxFileSize=5000000;
-              var form=$('#forma');
-           $( "#greatphoto" ).attr( "src",  '//'+files1[0].files[0].name);
-           console.log(files1);
-           event.preventDefault();
-                setTimeout(function () {
-                  var myImg = $('#greatphoto');
-                  console.log(myImg);
-                  if (myImg[0].height > 300 || myImg[0].width > 300) {
-                      alert(`Картинка слишком большая, ${myImg[0].width}x${myImg[0].height}, а надо небольше чем 300х300!!!`)
-                  }else if (files1[0].files[0].size>maxFileSize) {
-                      alert("Картинка весит ${files1[0].files[0].size} максимальный размер ${maxFileSize}!!!")
-                  }else {
+      $('#root').click((e) => {
+        event.preventDefault();
+        var photoFile = $(this).find('input[name="filePhoto"]')[0].files[0].webkitRelativePath;
+        var href = photoFile,
+          imgWidth,
+          img = new Image();
 
-// form.submit();
-                  }
+        img.onload = function() {
+          alert(img.width + 'x' + img.height); // здесь работает
+          imgWidth = img.width;
+        }
+        img.src = href;
 
-                }, 500);
-            })
+        // Здесь не заработает, т.к. переменная imgWidth пустая..., она
+        //заполнится после загрузки картинки, а алерт сработает сразу.
+        alert(imgWidth + 'x'); // здесь не работает
+
+        // Делаем так:
+        window.onload = function() {
+          alert(imgWidth + 'x'); // здесь работает
+          // Вызывается после полной загрузки страницы.
+          // (картинки, css, js, html и прочего) все-все...
+        }
+
+
+
+        console.log(photoFile);
+        // console.log(data);
+
+
+
+        //               var files1 = $('input');
+        //               var maxFileSize=5000000;
+        //               var form=$('#forma');
+        //            $( "#greatphoto" ).attr( "src",  '//'+files1[0].files[0].name);
+        //            console.log(files1);
+        //            event.preventDefault();
+        //                 setTimeout(function () {
+        //                   var myImg = $('#greatphoto');
+        //                   console.log(myImg);
+        //                   if (myImg[0].height > 300 || myImg[0].width > 300) {
+        //                       alert(`Картинка слишком большая, ${myImg[0].width}x${myImg[0].height}, а надо небольше чем 300х300!!!`)
+        //                   }else if (files1[0].files[0].size>maxFileSize) {
+        //                       alert("Картинка весит ${files1[0].files[0].size} максимальный размер ${maxFileSize}!!!")
+        //                   }else {
+        //
+        // // form.submit();
+        //                   }
+        //
+        //                 }, 500);
+      })
     });
-
-
-    </script>
+  </script>
 </body>
 
 </html>
