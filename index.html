@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+
+  <link rel="stylesheet" href="css/vendor.min.css">
+  <link rel="stylesheet" href="css/main.min.css">
+  <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+</head>
+
+<body>
+  <section>
+    <header class="header">
+      <div class="container">
+        <img src="img/Logo.png" alt="logo" class="header__logo">
+        <div class="header__search"><input type="text"></div>
+        <div class="header__icons">
+          <img src="img/Chat.png" alt="Chat">
+          <img src="img/Bell.png" alt="Bell">
+        </div>
+        <div class="header__user">
+          <img src="img/Image.png" alt="">
+          <span>Maximillian Beekeeper</span>
+        </div>
+      </div>
+    </header>
+  </section>
+  <section class="content">
+    <div class="container">
+      <div class="content__wrap">
+        <div class="content__left">
+          <div class="left-menu">
+            <div class="content__left-item"><img src="img/Feed.png" alt=""><span>Feed</span></div>
+            <div class="content__left-item"><img src="img/Ask.png" alt=""><span>Ask a Colleague</span></div>
+            <div class="content__left-item"><img src="img/Company.png" alt=""><span>Companies</span></div>
+            <div class="content__left-item"><img src="img/Services.png" alt=""><span>Service Directory</span></div>
+          </div>
+          <div class="content__left-stars">
+            <div class="content__left-logo">Advertisement</div>
+            <div class="content__left-photo"><img src="img/stars.png" alt=""></div>
+            <div class="content__left-foot"><a href="html\contactUs.html">Ads By Denteez.com</a></div>
+          </div>
+          <div class="content__left-company">
+            <div class="content__left-companyLogo">
+              <span>Featured Companies</span> <b>See All</b></div>
+            <div class="content__left-companies">
+              <div class="content__left-companyItem">
+                <div class="content__left-companyPhoto">
+                  <img src="img/c1.png" alt=""></div>
+                <div class="content__left-companyText">
+                  <h4 class="content__left-companyName">Company Name</h4>
+                  <p class="content__left-companyP">Manufacturer <br /> New York, USA</p>
+                  <span class="content__left-companyNow">Follow Now</span>
+                </div>
+              </div>
+              <div class="content__left-companyItem">
+                <div class="content__left-companyPhoto">
+                  <img src="img/c2.png" alt=""></div>
+                <div class="content__left-companyText">
+                  <h4 class="content__left-companyName">Company Name</h4>
+                  <p class="content__left-companyP">Manufacturer <br /> New York, USA</p>
+                  <span class="content__left-companyNow">Follow Now</span>
+                </div>
+              </div>
+              <div class="content__left-companyItem">
+                <div class="content__left-companyPhoto">
+                  <img src="img/c3.png" alt=""></div>
+                <div class="content__left-companyText">
+                  <h4 class="content__left-companyName">Company Name</h4>
+                  <p class="content__left-companyP">Manufacturer <br /> New York, USA</p>
+                  <span class="content__left-companyNow">Follow Now</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="content__left-companyFoot">
+            <div>Denteez Copyright 2015</div>
+            <div><a href="#">Terms of use</a> <a href="#">Privacy Policy</a></div>
+          </div>
+        </div>
+        <div class="content__center">
+          <div class="content__center-servicesDerictoty">
+            <span>Service Directory</span>
+            <button class="content__center-servicesDerictotyButton" type="button" name="button">Add New Service</button>
+          </div>
+          <div id="root">
+
+          </div>
+        </div>
+        <!-- <span class="m-dotted" id="example3">+</span> -->
+
+					<div class="box" style="display: none;">
+						<div class="box__modal" id="exampleModal3">
+							<div class="box__modal_close arcticmodal-close">close</div>
+
+						</div>
+					</div>
+
+
+<script type="text/babel">
+    class Place extends React.Component{
+    constructor(props){
+      super(props);
+        this.state={count:0,data:''};
+    }
+    componentWillMount(){
+  fetch('http://504080.com/api/v1/services/categories',{ method: 'GET',
+                headers: {'Authorization':'f30fa27afb096d10078a384ebbb4da9e4be6a466'},
+                 mode: 'cors',
+                cache: 'default' }).then(res => {
+                  console.log(res.status);
+                if (res.status>=400) {
+                    $('#exampleModal3').arcticmodal({
+                      closeOnEsc: true,
+                      closeOnOverlayClick: true,
+                      overlay: {
+                        css: {
+                          backgroundColor: '#fff',
+                          opacity: .60
+                        }
+                      }
+                    }).prepend(`<div class="box__content">
+                      	<span>It's not we :(, ${res.status} Client error!</span>
+                    </div>`);
+
+                }else if(res.status>=500){
+
+                    $('#exampleModal3').arcticmodal({
+                      closeOnEsc: true,
+                      closeOnOverlayClick: true,
+                      overlay: {
+                        css: {
+                          backgroundColor: '#fff',
+                          opacity: .60
+                        }
+                      }
+                    }).prepend(`<div class="box__content">
+                      	<span>It's not you, it's our mistake :(, ${res.status} Server error!</span>
+                    </div>`);
+
+                }else{
+                  return res.json()
+                }
+                  // return res.json()
+                }).then(user => {
+      this.setState({data: user.data});
+      // console.log(this.state.data[2]);
+  });
+    }
+    render(){
+      return(
+        <div className="place">
+        {this.state.data===''? <div className="preloader"></div>:(
+          this.state.data.map((el, i)=>{
+              return <div className="item">
+              <div className="elem" key={i}><img src={'http:'+el.icon} alt=""/></div>
+              <div className="title">{el.title}</div>
+              </div>
+          })
+        )}
+        </div>
+      );
+    }
+  }
+  const src =  document.getElementById('root');
+        ReactDOM.render(<Place></Place>,src);
+</script>
+        <div class="content__right">
+
+          <div class="content__right-company">
+            <div class="content__right-companyLogo">
+              <span>People you may know</span> <b>See All</b></div>
+            <div class="content__right-users">
+              <div class="content__right-user">
+                <div class="content__right-name">Dennis Adams</div>
+                <div class="content__right-offer">
+                  <img src="img/user1.png" alt="">
+                  <div class="content__right-text">
+                    <h4>Dentist (Practice Owner)</h4>
+                    <span>London, England</span>
+                    <div class="content__right-add">Add Friend</div>
+                  </div>
+                </div>
+              </div>
+              <div class="content__right-user">
+                <div class="content__right-name">Mary Carpenter</div>
+                <div class="content__right-offer">
+                  <img src="img/user2.png" alt="">
+                  <div class="content__right-text">
+                    <h4>Dentist (Practice Owner)</h4>
+                    <span>London, England</span>
+                    <div class="content__right-add">Add Friend</div>
+                  </div>
+                </div>
+              </div>
+              <div class="content__right-user">
+                <div class="content__right-name">Danielle Salazar</div>
+                <div class="content__right-offer">
+                  <img src="img/user3.png" alt="">
+                  <div class="content__right-text">
+                    <h4>Dentist (Practice Owner)</h4>
+                    <span>London, England</span>
+                    <div class="content__right-add">Add Friend</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+
+          <div class="content__right-company">
+            <div class="content__right-companyLogo content__right-companyLogo2">
+              <span>People you may know</span> <b>See All</b></div>
+            <div class="content__right-users">
+              <div class="content__right-user">
+                <div class="content__right-name">Product Name</div>
+                <div class="content__right-offer">
+                  <img src="img/p1.png" alt="">
+                  <div class="content__right-text">
+                    <h4>Product Short
+Description. The quick brown
+fox jumps over the
+lazy dog.</h4>
+
+                  </div>
+                </div>
+              </div>
+              <div class="content__right-user">
+                <div class="content__right-name">Product Name</div>
+                <div class="content__right-offer">
+                  <img src="img/p2.png" alt="">
+                  <div class="content__right-text">
+                    <h4>Product Short
+Description. The quick brown
+fox jumps over the
+lazy dog.</h4>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="content__left-stars content__right-photo">
+            <div class="content__right-adv">Advertisement</div>
+            <div class="content__left-photo"><img src="img/pin.png" alt=""></div>
+            <div class="content__left-foot"><a href="#">Ads By Denteez.com</a></div>
+          </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="js/vendor.min.js"></script>
+
+  <script src="js/main.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+
+  <link rel="stylesheet" href="../css/vendor.min.css">
+  <link rel="stylesheet" href="../css/main.min.css">
+</head>
+
+<body>
+  <div class="wrapper">
+    <div class="conactHeader">
+      <div class="conactHeader__mContainer container">
+        <div class="conactHeader__logo">
+          <img src="../img/Logo.png" alt="logo" class="conactHeader__logo-logo">
+        </div>
+        <div class="conactHeader__logInNow">
+          <a href="#">Log In Now</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="blockTop">
+      <div class="blockTop__mContainer container">
+        <h1>Home of Dentistry</h1>
+        <span>Denteez was created by dentists for dentistry in order to <br />
+              make the life of everyone involved in dentistry easier.</span>
+      </div>
+    </div>
+    <script type="text/javascript">
+    </script>
+
+
+
+    <div class="blockMiddle">
+      <div class="blockMiddle__mContainer container">
+        <div class="placeForm">
+          <form id="myForm">
+            <div class="Form">
+              <span class="Form__logo">Fields marked “*” are required</span>
+              <div>
+                <label for="select">Enquiry Type *</label>
+                <select class="Form__select" id="select" onchange="forreq()" name="select">
+                    <option value="Other">Other</option>
+                  </select>
+                <input  id='forRequerd'  class="Form__other form-control" type="text" placeholder="Other">
+                <div class="Form__labels"><label for="Name">Name *</label> <label class="Form__label" for="Email">Email *</label></div>
+                <div class="Form__inputs">
+                  <input required class="Form__other Form__dentist form-control" type="text" id="Name" placeholder="Dentist">
+                  <input required class="Form__other Form__dentist form-control" type="email" id="Email" placeholder="Email">
+                </div>
+                <label for="subject">Subject *</label>
+                <input required class="Form__other Form__subject form-control" type="text" id="subject" placeholder="">
+
+                <div class="Form__labels"><label for="subject">Description *</label> <label for="subject">(<span id="result">0</span>/1000)</label></div>
+
+                <textarea required maxlength="1000" class="Form__text form-control" id="sms" name="name" rows="8" cols="80"></textarea>
+                <script>
+                  function showCount() {
+                    result.innerHTML = sms.value.length;
+                  }
+                  sms.onkeyup = sms.oninput = showCount;
+                  sms.onpropertychange = function() {
+                    if (event.propertyName == "value") showCount();
+                  }
+                  sms.oncut = function() {
+                    setTimeout(showCount, 0);
+                  };
+                </script>
+                <div class="Form__down2">
+                  <input id="photo_input" name="filePhoto" type="file" class="Form__down">
+
+                  </input>
+                </div>
+
+              </div>
+            </div>
+            <button class="Form-button" type="submit" name="button">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="blockBottom">
+      <div class="blockBottom__mContainer container">
+        <h2>About Denteez</h2>
+        <div>
+          <p>Why is it always so difficult to find what you are looking for in dentistry? Whether it is the latest advancement in technology or techniques or simply a review or understanding of the vast amount of products? Perhaps finding someone to just
+            fix your broken equipment or simply hiring new staff or looking for that new job?</p>
+          <p>Our mission is to give every dental professional the possibility to discuss and share all aspects of their profession, their practice and their business. We aim to make the world of dentistry easy and accessible, so every dental professional
+            can find what they are looking for quickly and easily all in one place.</p>
+        </div>
+      </div>
+    </div>
+    <div class="blockFooter">
+      <div class="blockFooter__mContainer container">
+        <div class="blockFooter__copy">
+          Denteez Copyright 2015
+        </div>
+        <div class="blockFooter__links">
+          <div class="blockFooter__links-item"><a href="#">Support</a></div>
+          <div class="blockFooter__links-item"><a href="#">Privacy</a></div>
+          <div class="blockFooter__links-item"><a href="#">Terms of use</a></div>
+        </div>
+      </div>
+    </div>
+
+
+
+  </div>
+
+
+
+
+
+    <script src="../js/vendor.min.js"></script>
+
+    <script src="../js/main.min.js"></script>
+</body>
+
+</html>
